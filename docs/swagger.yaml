@@ -1,0 +1,24 @@
+info:
+  contact: {}
+paths:
+  /problemList:
+    get:
+      description: 获取列表
+      parameters:
+      - description: page
+        in: query
+        name: page
+        type: integer
+      - description: limit
+        in: query
+        name: limit
+        type: integer
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      summary: ping example
+      tags:
+      - List
+swagger: "2.0"

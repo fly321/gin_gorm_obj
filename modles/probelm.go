@@ -1,5 +1,10 @@
 package modles
 
+import (
+	"fmt"
+	"gorm.io/gorm"
+)
+
 type Problem struct {
 	Common
 	CategoryId string `gorm:"column:category_id;type:varchar(255);" json:"category_id"` //问题分类id
@@ -12,4 +17,9 @@ type Problem struct {
 // TableName 配置表名
 func (table *Problem) TableName() string {
 	return "problem"
+}
+
+func GetProblemList(keyword string) *gorm.DB {
+	keywordd := fmt.Sprintf("%%%s%%", keyword)
+	return Db.Model(new(Problem)).Where("title like ? or content like ?", keywordd, keywordd)
 }
