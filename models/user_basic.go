@@ -1,6 +1,6 @@
-package modles
+package models
 
-type User struct {
+type UserBasic struct {
 	Common
 	Name     string `gorm:"column:name;type:varchar(100);" json:"name"`        //用户名
 	Password string `gorm:"column:password;type:varchar(32);" json:"password"` //密码
@@ -9,6 +9,6 @@ type User struct {
 }
 
 // TableName 配置表名
-func (table *User) TableName() string {
+func (table *UserBasic) TableName() string {
 	return "user"
 }

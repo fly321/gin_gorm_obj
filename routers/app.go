@@ -12,6 +12,7 @@ func Router() *gin.Engine {
 	r := gin.Default()
 	r.GET("/ping", service.Ping)
 	r.GET("/problemList", service.GetProblemList)
+	r.GET("/problemDetail", service.GetProblemDetail)
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
 	return r
 

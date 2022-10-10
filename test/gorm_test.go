@@ -1,7 +1,7 @@
 package test
 
 import (
-	"demoProject/modles"
+	"demoProject/models"
 	"fmt"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
@@ -14,7 +14,7 @@ func TestGormTest(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	data := make([]*modles.Problem, 0)
+	data := make([]*models.Problem, 0)
 	err = db.Find(&data).Error
 	if err != nil {
 		t.Fatal(err)
