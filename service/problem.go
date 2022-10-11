@@ -4,6 +4,7 @@ import (
 	"demoProject/define"
 	"demoProject/models"
 	"github.com/gin-gonic/gin"
+	"gorm.io/gorm"
 	"log"
 	"net/http"
 	"strconv"
@@ -63,9 +64,16 @@ func GetProblemDetail(ctx *gin.Context) {
 	problemBasic := new(models.ProblemBasic)
 	err := models.Db.Where("identity = ?", identity).First(&problemBasic).Error
 	if err != nil {
+		if err == gorm.ErrRecordNotFound {
+			ctx.JSON(http.StatusOK, gin.H{
+				"code":    -1,
+				"message": "The current record does not exist",
+			})
+			return
+		}
 		ctx.JSON(http.StatusOK, gin.H{
 			"code":    -1,
-			"message": err,
+			"message": err.Error(),
 		})
 		return
 	}
