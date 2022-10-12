@@ -11,9 +11,9 @@ import (
 )
 
 // GetProblemList
-// @Summary ping example
+// @Summary ping 获取列表
 // @Description 获取列表
-// @Tags List
+// @Tags 公共方法
 // @Param page query int false "page"
 // @Param limit query int false "limit"
 // @Param category_identity query string false "category_id"
@@ -51,7 +51,7 @@ func GetProblemList(ctx *gin.Context) {
 // @Description 问题详情
 // @Param identity query string false "problem_identity"
 // @Success 200 {string} string "OK"
-// @Router /problemList [get]
+// @Router /problemDetail [get]
 func GetProblemDetail(ctx *gin.Context) {
 	identity := ctx.Query("identity")
 	if identity == "" {

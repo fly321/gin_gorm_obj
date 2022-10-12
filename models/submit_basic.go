@@ -10,5 +10,5 @@ type SubmitBasic struct {
 
 // TableName 配置表名
 func (table *SubmitBasic) TableName() string {
-	return "submit"
+	return "submit_basic"
 }

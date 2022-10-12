@@ -1,6 +1,22 @@
 info:
   contact: {}
 paths:
+  /problemDetail:
+    get:
+      description: 问题详情
+      parameters:
+      - description: problem_identity
+        in: query
+        name: identity
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      summary: 问题详情
+      tags:
+      - 公共方法
   /problemList:
     get:
       description: 获取列表
@@ -13,12 +29,32 @@ paths:
         in: query
         name: limit
         type: integer
+      - description: category_id
+        in: query
+        name: category_identity
+        type: string
       responses:
         "200":
           description: OK
           schema:
             type: string
-      summary: ping example
+      summary: ping 获取列表
       tags:
-      - List
+      - 公共方法
+  /userDetail:
+    get:
+      description: 查询用户 identity
+      parameters:
+      - description: identity
+        in: query
+        name: identity
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      summary: 查询用户
+      tags:
+      - 公共方法
 swagger: "2.0"

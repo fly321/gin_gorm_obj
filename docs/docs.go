@@ -16,13 +16,38 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
+        "/problemDetail": {
+            "get": {
+                "description": "问题详情",
+                "tags": [
+                    "公共方法"
+                ],
+                "summary": "问题详情",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "problem_identity",
+                        "name": "identity",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
         "/problemList": {
             "get": {
                 "description": "获取列表",
                 "tags": [
-                    "List"
+                    "公共方法"
                 ],
-                "summary": "ping example",
+                "summary": "ping 获取列表",
                 "parameters": [
                     {
                         "type": "integer",
@@ -34,6 +59,37 @@ const docTemplate = `{
                         "type": "integer",
                         "description": "limit",
                         "name": "limit",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "category_id",
+                        "name": "category_identity",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/userDetail": {
+            "get": {
+                "description": "查询用户 identity",
+                "tags": [
+                    "公共方法"
+                ],
+                "summary": "查询用户",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "identity",
+                        "name": "identity",
                         "in": "query"
                     }
                 ],

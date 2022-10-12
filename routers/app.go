@@ -14,6 +14,10 @@ func Router() *gin.Engine {
 	r.GET("/problemList", service.GetProblemList)
 	r.GET("/problemDetail", service.GetProblemDetail)
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
+
+	// 用户详情查找
+	r.GET("/userDetail", service.GetUserDetail)
+
 	return r
 
 }
