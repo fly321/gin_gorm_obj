@@ -18,6 +18,9 @@ func Router() *gin.Engine {
 	// 用户详情查找
 	r.GET("/userDetail", service.GetUserDetail)
 
+	// 用户登录
+	r.POST("/userLogin", service.UserLogin)
+
 	return r
 
 }

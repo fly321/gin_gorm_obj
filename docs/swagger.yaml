@@ -57,4 +57,26 @@ paths:
       summary: 查询用户
       tags:
       - 公共方法
+  /userLogin:
+    post:
+      description: 用户登录
+      parameters:
+      - description: username
+        in: formData
+        name: username
+        required: true
+        type: string
+      - description: password
+        in: formData
+        name: password
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      summary: 用户登录
+      tags:
+      - 公共方法
 swagger: "2.0"
