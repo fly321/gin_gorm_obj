@@ -62,7 +62,9 @@ func GetProblemDetail(ctx *gin.Context) {
 		return
 	}
 	problemBasic := new(models.ProblemBasic)
-	err := models.Db.Where("identity = ?", identity).Preload("ProblemCategories").Preload("ProblemCategories.CategoryBasic").First(&problemBasic).Error
+	err := models.Db.Where("identity = ?", identity).Preload("ProblemCategories", func(db *gorm.DB) *gorm.DB {
+		return db.Omit("id")
+	}).Preload("ProblemCategories.CategoryBasic").First(&problemBasic).Error
 	if err != nil {
 		if err == gorm.ErrRecordNotFound {
 			ctx.JSON(http.StatusOK, gin.H{
