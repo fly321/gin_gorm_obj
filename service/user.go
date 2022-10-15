@@ -88,10 +88,19 @@ func UserLogin(ctx *gin.Context) {
 		})
 		return
 	}
-
+	token, err := helper.GenerateToken(username, data.Identity)
+	if err != nil {
+		ctx.JSON(http.StatusOK, gin.H{
+			"code": -1,
+			"msg":  "error: " + err.Error(),
+		})
+	}
 	ctx.JSON(http.StatusOK, gin.H{
 		"code": 1,
 		"msg":  "success",
-		"data": data,
+		"data": map[string]interface{}{
+			"token":         token,
+			"userModelData": data,
+		},
 	})
 }
