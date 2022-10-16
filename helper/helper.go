@@ -6,7 +6,9 @@ import (
 	"fmt"
 	"github.com/dgrijalva/jwt-go/v4"
 	"github.com/jordan-wright/email"
+	"math/rand"
 	"net/smtp"
+	"time"
 )
 
 func GetMd5(s string) string {
@@ -68,4 +70,14 @@ func SendEmail(toEmail, code string) error {
 			InsecureSkipVerify: true,
 			ServerName:         "smtp.qq.com",
 		})
+}
+
+// GenerateCode 生成验证码
+func GenerateCode(number int) string {
+	var code string
+	rand.Seed(time.Now().UnixNano())
+	for i := 0; i < number; i++ {
+		code += fmt.Sprintf("%d", rand.Intn(10))
+	}
+	return code
 }
