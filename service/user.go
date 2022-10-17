@@ -88,7 +88,7 @@ func UserLogin(ctx *gin.Context) {
 		})
 		return
 	}
-	token, err := helper.GenerateToken(username, data.Identity)
+	token, err := helper.GenerateToken(username, data.Identity, data.IsAdmin)
 	if err != nil {
 		ctx.JSON(http.StatusOK, gin.H{
 			"code": -1,
