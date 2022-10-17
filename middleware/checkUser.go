@@ -11,6 +11,7 @@ func AuthAdminCheck() gin.HandlerFunc {
 		// TODO
 		auth := ctx.GetHeader("Authorization")
 		if auth == "" {
+			ctx.Abort()
 			ctx.JSON(http.StatusOK, gin.H{
 				"code": -1,
 				"msg":  "auth can not be empty",
@@ -20,6 +21,7 @@ func AuthAdminCheck() gin.HandlerFunc {
 
 		userClaim, err := helper.AnalyseToken(auth)
 		if err != nil {
+			ctx.Abort()
 			ctx.JSON(http.StatusOK, gin.H{
 				"code": -1,
 				"msg":  "error: " + err.Error(),
@@ -28,6 +30,7 @@ func AuthAdminCheck() gin.HandlerFunc {
 		}
 
 		if userClaim.IsAdmin != 1 {
+			ctx.Abort()
 			ctx.JSON(http.StatusOK, gin.H{
 				"code": -1,
 				"msg":  "no permission",
