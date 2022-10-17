@@ -2,6 +2,7 @@ package routers
 
 import (
 	_ "demoProject/docs"
+	"demoProject/middleware"
 	"demoProject/service"
 	"github.com/gin-gonic/gin"
 	swaggerfiles "github.com/swaggo/files"
@@ -16,7 +17,7 @@ func Router() *gin.Engine {
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
 
 	// 用户详情查找
-	r.GET("/userDetail", service.GetUserDetail)
+	r.GET("/userDetail", middleware.AuthAdminCheck(), service.GetUserDetail)
 
 	// 用户登录
 	r.POST("/userLogin", service.UserLogin)
