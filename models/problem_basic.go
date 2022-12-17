@@ -31,6 +31,5 @@ func GetProblemList(keyword, categoryIdentity string) *gorm.DB {
 		tx.Joins("right join problem_category pc on pc.problem_id = problem_basic.id").
 			Where("pc.category_id = (select cb.id from category_basic cb where cb.identity = ?)", categoryIdentity)
 	}
-
 	return tx
 }

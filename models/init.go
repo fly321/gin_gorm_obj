@@ -1,6 +1,7 @@
 package models
 
 import (
+	"demoProject/global"
 	"fmt"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
@@ -12,7 +13,12 @@ var err error
 
 func init() {
 	fmt.Println("链接数据库 \n\r")
-	dsn := "root:root@tcp(127.0.0.1:3306)/gin_gorm_obj?charset=utf8mb4&parseTime=True&loc=Local"
+	Database := global.DatabaseSetting
+	//Server := global.GetServerSetting()
+	dsn := fmt.Sprintf("%s:%s@tcp(%s)/%s?charset=%s&parseTime=%t&loc=%s", Database.UserName, Database.Password, Database.Host, Database.DBName, Database.Charset, Database.ParseTime, Database.Loc)
+	fmt.Println(global.DatabaseSetting.UserName)
+	// 连接数据库
+	//dsn := "root:root@tcp(127.0.0.1:3306)/gin_gorm_obj?charset=utf8mb4&parseTime=True&loc=Local"
 	Db, err = gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	defer func() {
 		err2 := recover() //	recover 内置函数捕获异常
@@ -29,10 +35,10 @@ func init() {
 		panic("failed to connect database")
 	}
 
-	// SetMaxIdleConns 设置空闲连接池中连接的最大数量
+	// SetMaxIdleCons 设置空闲连接池中连接的最大数量
 	sqlDB.SetMaxIdleConns(10)
 
-	// SetMaxOpenConns 设置打开数据库连接的最大数量。
+	// SetMaxOpenCons 设置打开数据库连接的最大数量。
 	sqlDB.SetMaxOpenConns(100)
 
 	// SetConnMaxLifetime 设置了连接可复用的最大时间。
